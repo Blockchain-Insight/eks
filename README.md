@@ -66,3 +66,70 @@ Do you want to perform these actions?
   Enter a value: 
 ```
 Enter a **yes** on your screen. Terraform will start applying and show the status log on your screen. It will take upto 30 Minutes for the apply to complete
+
+Connecting to cluster
+```bash
+aws eks update-kubeconfig --name hypersign
+```
+Output will be
+```bash
+Updated context arn:aws:eks:eu-central-1:xxxxxxxx:cluster/hypersign in /Users/xxxx/.kube/config
+```
+```bash
+kubectl get ns
+NAME              STATUS   AGE
+default           Active   45m
+kube-node-lease   Active   45m
+kube-public       Active   45m
+kube-system       Active   45m
+```
+
+```bash
+kubectl get all -n default
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   x.x.x.x      <none>        443/TCP   46m
+
+```
+
+```bash
+kubectl get all -n kube-system
+NAME                                  DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR              AGE
+daemonset.apps/aws-node               3         3         3       3            3           <none>                     46m
+daemonset.apps/ebs-csi-node           3         3         3       3            3           kubernetes.io/os=linux     10m
+daemonset.apps/ebs-csi-node-windows   0         0         0       0            0           kubernetes.io/os=windows   10m
+daemonset.apps/kube-proxy             3         3         3       3            3           <none>                     46m
+
+ NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/coredns              2/2     2            0           51m
+deployment.apps/ebs-csi-controller   2/2     2            0           14m
+
+```
+
+```bash
+% kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-10-0-24-233.eu-central-1.compute.internal   Ready    <none>   40m   v1.24.11-eks-a59e1f0
+ip-10-0-24-36.eu-central-1.compute.internal    Ready    <none>   40m   v1.24.11-eks-a59e1f0
+ip-10-0-39-50.eu-central-1.compute.internal    Ready    <none>   40m   v1.24.11-eks-a59e1f0
+
+```
+
+
+```bash
+terraform destroy --var-file=variables.tfvars
+```
+
+```bash
+Plan: 0 to add, 0 to change, 74 to destroy.
+
+Changes to Outputs:
+  - cluster_oidc_issuer_url = "https://oidc.eks.eu-central-1.amazonaws.com/id/xxxxxx" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value:
+
+```
+  
