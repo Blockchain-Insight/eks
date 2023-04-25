@@ -6,6 +6,14 @@ AWS credentials configuration
 ```bash
   export AWS_SECRET_ACCESS_KEY="XXXXX"
 ```
+```bash
+aws configure --profile test
+AWS Access Key ID [None]: xxxxx
+AWS Secret Access Key [None]: xxxxx
+Default region name [None]: eu-central-1
+Default output format [None]: json
+```
+
 
 terraform is installed
 
