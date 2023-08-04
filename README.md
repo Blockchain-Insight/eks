@@ -1,4 +1,3 @@
-Prerequirements
 AWS credentials configuration
 ```bash
   export AWS_ACCESS_KEY_ID="XXXXXX"
@@ -14,8 +13,6 @@ Default region name [None]: eu-central-1
 Default output format [None]: json
 ```
 
-
-terraform is installed
 
 
 
@@ -152,71 +149,6 @@ Do you really want to destroy all resources?
 
   Enter a value:
 
-```
-  
-Prepare the eks cluster
-```bash
-git clone git@github.com:Blockchain-Insight/helm-releases.git
-```
-
-```bash
-cd helm-releases/init
-```
-
-```bash
-kubectl apply -f namespaces.yaml
-```
-
-```bash
-helm repo add external-secrets https://charts.external-secrets.io
-helm install external-secrets external-secrets/external-secrets -n addons
-```
-
-```bash
-kubectl apply -f cluster_secret_store.yaml
-```
-
-```bash
-kubectl apply -f external_secrets.yaml
-```
-
-```bash
-helm install ingress oci://ghcr.io/nginxinc/charts/nginx-ingress -n ingress
-```
-Create Route53 entries for api, grpc, rpc in AWS und the hosted zone which is already prepared earlier
-
-Deploying full node and validator application
-
-```bash
-cd helm-releases/node
-```
-
-```bash
-helm install hypersign . -n node
-```
-
-```bash
-cd helm-releases/cosmos-exporter-node
-```
-
-```bash
-helm install hypersign . -n node
-```
-
-```bash
-cd helm-releases/validator
-```
-
-```bash
-helm install hypersign . -n validator
-```
-
-```bash
-cd helm-releases/cosmos-exporter-validator
-```
-
-```bash
-helm install hypersign . -n validator
 ```
 
 

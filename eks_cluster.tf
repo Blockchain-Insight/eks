@@ -105,8 +105,8 @@ module "eks" {
       ]
     },
 
-    admin = {
-      name           = "admin"
+    infra = {
+      name           = "infra"
       disk_size      = var.disk_size
       subnet_ids     = module.vpc.public_subnets
       min_size       = var.min_capacity
@@ -115,22 +115,14 @@ module "eks" {
       instance_types = var.instance_type
       labels = {
         Environment = "${var.cluster_name}-${var.region}"
-        Role        = "admin"
+        Role        = "infra"
       }
 
       tags = merge(var.tags,
         {
-          "role" = "admin"
+          "role" = "infra"
         }
       )
-
-      taints = [
-        {
-          key    = "dedicated"
-          value  = "admin"
-          effect = "NO_SCHEDULE"
-        }
-      ]
     },
   }
 }
@@ -144,6 +136,7 @@ resource "aws_iam_policy" "additional" {
       {
         Action = [
           "ec2:Describe*",
+          "ssm:GetParameter*",
         ]
         Effect   = "Allow"
         Resource = "*"
