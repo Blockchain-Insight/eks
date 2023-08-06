@@ -1,11 +1,5 @@
 AWS credentials configuration
 ```bash
-  export AWS_ACCESS_KEY_ID="XXXXXX"
-```
-```bash
-  export AWS_SECRET_ACCESS_KEY="XXXXX"
-```
-```bash
 aws configure --profile test
 AWS Access Key ID [None]: xxxxx
 AWS Secret Access Key [None]: xxxxx
@@ -33,7 +27,7 @@ Shown below are dummy values. Enter the required inputs and save the variables.t
 # AWS region
 region        = "eu-central-1"
 # Name of eks cluster
-cluster_name  = "demo"
+cluster_name  = "hypersign"
 # Instance type for eks cluster
 instance_type = ["abc.large"]
 # AWS account id
@@ -132,6 +126,7 @@ ip-10-0-39-50.eu-central-1.compute.internal    Ready    <none>   40m   v1.24.11-
 
 ```
 
+**To destroy the cluster:**
 
 ```bash
 terraform destroy --var-file=variables.tfvars
