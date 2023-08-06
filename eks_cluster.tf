@@ -5,11 +5,7 @@ module "eks" {
   cluster_name                   = var.cluster_name
   cluster_version                = var.cluster_version
   cluster_endpoint_public_access = true
-  create_kms_key                 = false
-  cluster_encryption_config = {
-    resources        = ["secrets"]
-    provider_key_arn = "arn:aws:kms:eu-central-1:508468563203:key/b207fc6f-66c4-4aff-b684-d8da24759c76"
-  }
+  create_kms_key                 = true
   cluster_addons = {
     coredns = {
       preserve    = true
